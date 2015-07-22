@@ -1,16 +1,16 @@
-var mongoose = require('mongoose')
-  , helper = require('./helper')
-  , should = require('should')
-  , models = require('../models')
-  , Task = models('Task')
-/**
- * Start here
- *
- * These tests describe the model that you'll be setting up in models/task.model.js
- *
- */
+var mongoose = require('mongoose'),
+  helper = require('./helper'),
+  should = require('should'),
+  models = require('../models'),
+  Task = models('Task')
+  /**
+   * Start here
+   *
+   * These tests describe the model that you'll be setting up in models/task.model.js
+   *
+   */
 
-describe('Task', function () {
+describe('Task', function() {
   //clear the database before the tests
   before(function(done) {
     helper.clearDb().then(function() {
@@ -78,7 +78,9 @@ describe('Task', function () {
     describe('addChild', function() {
       it('should return a promise for a new task with the parent\'s id', function(done) {
         task
-          .addChild({ name: 'task2' })
+          .addChild({
+            name: 'task2'
+          })
           .then(function(child) {
             child.parent.should.equal(task._id)
             child.name.should.equal('task2')
@@ -91,7 +93,9 @@ describe('Task', function () {
     describe('getChildren', function() {
 
       beforeEach(function(done) {
-        task.addChild({ name: 'foo' }).then(function() {
+        task.addChild({
+          name: 'foo'
+        }).then(function() {
           done()
         }, done)
       })
@@ -113,7 +117,9 @@ describe('Task', function () {
       var childrenReferences = []
 
       var childBuilder = function(done) {
-        task.addChild({ name: 'foo' }).then(function(child) {
+        task.addChild({
+          name: 'foo'
+        }).then(function(child) {
           childrenReferences.push(child)
           done()
         }, done)
