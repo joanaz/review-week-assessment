@@ -1,5 +1,4 @@
-var mongoose = require('mongoose'),
-  helper = require('../test/helper')
+var mongoose = require('mongoose')
 var _ = require('lodash')
 var Task;
 var Schema = mongoose.Schema;
@@ -27,11 +26,11 @@ var TaskSchema = new Schema({
 
 TaskSchema.virtual('timeRemaining').get(function() {
   if (!this.due) return Infinity
-  return this.due - helper.dates.addDay(0)
+  return this.due - new Date()
 })
 
 TaskSchema.virtual('overdue').get(function() {
-  return this.timeRemaining < 0
+  return this.timeRemaining < 0 && !this.complete
 })
 
 //methods
